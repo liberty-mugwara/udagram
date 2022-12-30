@@ -1,5 +1,3 @@
-import { deleteLocalFiles, filterImageFromURL } from './util/util';
-
 import express from 'express';
 import { imageFilterRouter } from './routes';
 
