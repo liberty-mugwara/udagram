@@ -1,6 +1,7 @@
 import { deleteLocalFiles, filterImageFromURL } from './util/util';
 
 import express from 'express';
+import { imageFilterRouter } from './routes';
 
 (async () => {
   const app = express();
@@ -28,13 +29,13 @@ import express from 'express';
   //    2. call filterImageFromURL(image_url) to filter the image
   //    3. send the resulting file in the response
   //    4. deletes any files on the server on finish of the response
-  // QUERY PARAMATERS
+  // QUERY PARAMETERS
   //    image_url: URL of a publicly accessible image
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
-
+  app.use('/filteredimage', imageFilterRouter);
   //! END @TODO1
 
   // Root Endpoint
