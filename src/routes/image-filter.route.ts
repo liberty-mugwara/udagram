@@ -1,9 +1,8 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
+import { getFilteredImages } from '../controllers';
 
 const router = Router();
 
-router.get('/', async (req: Request, res: Response) => {
-  res.send('coming soon');
-});
+router.get('/', getFilteredImages);
 
 export const imageFilterRouter = router;
