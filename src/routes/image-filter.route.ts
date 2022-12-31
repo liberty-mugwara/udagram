@@ -3,6 +3,6 @@ import { getFilteredImages } from '../controllers';
 
 const router = Router();
 
-router.get('/', getFilteredImages);
+router.get('/filteredimage', getFilteredImages);
 
 export const imageFilterRouter = router;
