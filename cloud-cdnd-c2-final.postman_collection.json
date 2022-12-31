@@ -1,63 +1,266 @@
 {
-	"info": {
-		"_postman_id": "4bcf1909-8996-44b7-be35-b130ab03d12f",
-		"name": "cloud-cdnd-c2-final",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "http://localhost:8082/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{HOST}}/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
-					"protocol": "http",
-					"host": [
-						"{{HOST}}"
-					],
-					"path": [
-						"filteredimage"
-					],
-					"query": [
-						{
-							"key": "image_url",
-							"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg"
-						}
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "5887df52-1889-4e1f-82ee-054ab37b450a",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "5e332dfe-c833-430b-b947-ab6c00311c28",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"id": "1df3d31a-de30-494b-a3d0-f1228dd8713c",
-			"key": "HOST",
-			"value": "localhost:8082",
-			"type": "string"
-		}
-	]
+  "info": {
+    "_postman_id": "9f5064c0-88b8-4170-8246-7b2aa558e4ee",
+    "name": "cloud-cdnd-c2-final",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24806226"
+  },
+  "item": [
+    {
+      "name": "404",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"404 status is valid\",()=>{",
+              "    pm.response.to.be.error;",
+              "    pm.response.to.have.status(404)",
+              "})",
+              "",
+              "pm.test(\"404 response is valid\",()=>{",
+              "    pm.response.to.be.withBody",
+              "    pm.response.to.have.jsonBody()",
+              "    pm.expect(pm.response.json()).to.be.equal(\"The Image from the provided url was not found!\")",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
+          "host": ["{{BASE_URL}}"],
+          "path": ["filteredimage"],
+          "query": [
+            {
+              "key": "image_url",
+              "value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "400 - malformed url",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Malformed image url status is valid\",()=>{",
+              "    pm.response.to.be.error;",
+              "    pm.response.to.have.status(400)",
+              "})",
+              "",
+              "pm.test(\"Malformed image url response is valid\",()=>{",
+              "    pm.response.to.be.withBody",
+              "    pm.response.to.have.jsonBody()",
+              "    pm.expect(pm.response.json()).to.be.equal(\"Invalid url\")",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/filteredimage?image_url=www.google.com",
+          "host": ["{{BASE_URL}}"],
+          "path": ["filteredimage"],
+          "query": [
+            {
+              "key": "image_url",
+              "value": "www.google.com"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "400 - url dosn't link to image",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Malformed image url status is valid\",()=>{",
+              "    pm.response.to.be.error;",
+              "    pm.response.to.have.status(400)",
+              "})",
+              "",
+              "pm.test(\"Malformed image url response is valid\",()=>{",
+              "    pm.response.to.be.withBody",
+              "    pm.response.to.have.jsonBody()",
+              "    pm.expect(pm.response.json()).to.be.equal(\"The provided url does not link to an image. the content type is text/html; charset=UTF-8\")",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/filteredimage?image_url=https://commons.wikimedia.org/wiki/File:Lamborghini_Veneno.jpg",
+          "host": ["{{BASE_URL}}"],
+          "path": ["filteredimage"],
+          "query": [
+            {
+              "key": "image_url",
+              "value": "https://commons.wikimedia.org/wiki/File:Lamborghini_Veneno.jpg"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "400 - unsupported image",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Malformed image url status is valid\",()=>{",
+              "    pm.response.to.be.error;",
+              "    pm.response.to.have.status(400)",
+              "})",
+              "",
+              "pm.test(\"Malformed image url response is valid\",()=>{",
+              "    pm.response.to.be.withBody",
+              "    pm.response.to.have.jsonBody()",
+              "    pm.expect(pm.response.json()).to.be.equal(\"Image not supported! The image format is: \\\"svg+xml\\\". The supported image formats are: bmp | gif | jpeg | png | tiff.\")",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/filteredimage?image_url=https://httpbin.org/image/svg",
+          "host": ["{{BASE_URL}}"],
+          "path": ["filteredimage"],
+          "query": [
+            {
+              "key": "image_url",
+              "value": "https://httpbin.org/image/svg"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "500",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Malformed image url status is valid\",()=>{",
+              "    pm.response.to.be.error;",
+              "    pm.response.to.have.status(500)",
+              "})",
+              "",
+              "pm.test(\"Malformed image url response is valid\",()=>{",
+              "    pm.response.to.be.withBody",
+              "    pm.response.to.have.jsonBody()",
+              "    pm.expect(pm.response.json()).to.be.equal(\"The server hosting the Image from the provided url has encountered an internal error.\")",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/filteredimage?image_url=https://httpbin.org/status/500",
+          "host": ["{{BASE_URL}}"],
+          "path": ["filteredimage"],
+          "query": [
+            {
+              "key": "image_url",
+              "value": "https://httpbin.org/status/500"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "successful request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Succcessful request status test\",()=>{",
+              "    pm.response.to.be.ok",
+              "    pm.response.to.have.status(200)",
+              "})",
+              "",
+              "pm.test(\"Malformed image url response is valid\",()=>{",
+              "    pm.response.to.be.withBody",
+              "    pm.response.to.have.header(\"Content-Type\", \"image/jpeg\");",
+              "})"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
+          "host": ["{{BASE_URL}}"],
+          "path": ["filteredimage"],
+          "query": [
+            {
+              "key": "image_url",
+              "value": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "HOST",
+      "value": "localhost:8082",
+      "type": "string"
+    }
+  ]
 }

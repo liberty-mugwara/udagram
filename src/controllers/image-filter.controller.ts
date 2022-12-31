@@ -3,6 +3,7 @@ import {
   HTTPResponseError,
   checkStatus,
 } from '../errors';
+import { deleteLocalFiles, filterImageFromURL } from '../util/util';
 
 import { TControllerFn } from 'src/types';
 import { URL } from 'node:url';
@@ -13,22 +14,25 @@ export const getFilteredImages: TControllerFn = async (req, res) => {
 
   if (!imageUrl) {
     res.status(400);
-    return res.send('The image_url parameter is required');
+    return res.json('The image_url parameter is required');
   }
   try {
-    const contentType = await verifyImageUrl(imageUrl);
-    res.send(contentType);
+    await verifyImageUrl(imageUrl);
+    const filteredPath = await filterImageFromURL(imageUrl);
+    res.sendFile(filteredPath, () => {
+      deleteLocalFiles([filteredPath]);
+    });
   } catch (e) {
     if (
       e instanceof ExternalHTTPResponseError ||
       e instanceof HTTPResponseError
     ) {
       res.status(e.statusCode);
-      return res.send(e.message);
+      return res.json(e.message);
     }
-
+    console.error(e);
     res.status(500);
-    res.send('Oops! Internal server error.');
+    res.json('Oops! Internal server error.');
   }
 };
 
