@@ -13,8 +13,8 @@
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --timeout 10000 -r ts-node/register 'tests/**/*.ts'",
     "lint": "eslint **/*.ts",
     "lint:fix": "eslint --fix **/*.ts",
-    "prettier": "prettier 'src/**/*.ts'",
-    "prettier:fix": "prettier --write 'src/**/*.ts'",
+    "prettier": "prettier '**/*.ts'",
+    "prettier:fix": "prettier --write '**/*.ts'",
     "prepare": "husky install"
   },
   "lint-staged": {
