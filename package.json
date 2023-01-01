@@ -9,7 +9,7 @@
     "dev": "ts-node-dev ./src/server.ts",
     "prod": "tsc && node ./www/server.js",
     "clean": "rimraf www/ || true",
-    "build": "npm run clean && tsc && cp package.json www/package.json && mkdir www/tmp/ && cd www && zip -r Archive.zip . && cd ..",
+    "build": "npm run clean && tsc && cp package.json www/package.json && node build-cleanup.js && mkdir www/tmp/ && cd www && zip -r Archive.zip . && cd ..",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --timeout 10000 -r ts-node/register 'tests/**/*.ts'",
     "lint": "eslint **/*.ts",
     "lint:fix": "eslint --fix **/*.ts",
