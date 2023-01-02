@@ -32,7 +32,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "jimp": "^0.16.1",
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "tslib": "^2.4.1"
   },
   "devDependencies": {
     "@types/chai-as-promised": "^7.1.5",
