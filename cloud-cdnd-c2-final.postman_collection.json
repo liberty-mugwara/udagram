@@ -1,13 +1,28 @@
 {
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [""],
+        "type": "text/javascript"
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "exec": [""],
+        "type": "text/javascript"
+      }
+    }
+  ],
   "info": {
+    "_exporter_id": "24806226",
     "_postman_id": "9f5064c0-88b8-4170-8246-7b2aa558e4ee",
     "name": "cloud-cdnd-c2-final",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "24806226"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
-      "name": "404",
       "event": [
         {
           "listen": "test",
@@ -28,11 +43,11 @@
           }
         }
       ],
+      "name": "404",
       "request": {
-        "method": "GET",
         "header": [],
+        "method": "GET",
         "url": {
-          "raw": "{{BASE_URL}}/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
           "host": ["{{BASE_URL}}"],
           "path": ["filteredimage"],
           "query": [
@@ -40,13 +55,13 @@
               "key": "image_url",
               "value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg"
             }
-          ]
+          ],
+          "raw": "{{BASE_URL}}/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg"
         }
       },
       "response": []
     },
     {
-      "name": "400 - malformed url",
       "event": [
         {
           "listen": "test",
@@ -67,11 +82,11 @@
           }
         }
       ],
+      "name": "400 - malformed url",
       "request": {
-        "method": "GET",
         "header": [],
+        "method": "GET",
         "url": {
-          "raw": "{{BASE_URL}}/filteredimage?image_url=www.google.com",
           "host": ["{{BASE_URL}}"],
           "path": ["filteredimage"],
           "query": [
@@ -79,13 +94,13 @@
               "key": "image_url",
               "value": "www.google.com"
             }
-          ]
+          ],
+          "raw": "{{BASE_URL}}/filteredimage?image_url=www.google.com"
         }
       },
       "response": []
     },
     {
-      "name": "400 - url dosn't link to image",
       "event": [
         {
           "listen": "test",
@@ -106,11 +121,11 @@
           }
         }
       ],
+      "name": "400 - url dosn't link to image",
       "request": {
-        "method": "GET",
         "header": [],
+        "method": "GET",
         "url": {
-          "raw": "{{BASE_URL}}/filteredimage?image_url=https://commons.wikimedia.org/wiki/File:Lamborghini_Veneno.jpg",
           "host": ["{{BASE_URL}}"],
           "path": ["filteredimage"],
           "query": [
@@ -118,13 +133,13 @@
               "key": "image_url",
               "value": "https://commons.wikimedia.org/wiki/File:Lamborghini_Veneno.jpg"
             }
-          ]
+          ],
+          "raw": "{{BASE_URL}}/filteredimage?image_url=https://commons.wikimedia.org/wiki/File:Lamborghini_Veneno.jpg"
         }
       },
       "response": []
     },
     {
-      "name": "400 - unsupported image",
       "event": [
         {
           "listen": "test",
@@ -145,11 +160,11 @@
           }
         }
       ],
+      "name": "400 - unsupported image",
       "request": {
-        "method": "GET",
         "header": [],
+        "method": "GET",
         "url": {
-          "raw": "{{BASE_URL}}/filteredimage?image_url=https://httpbin.org/image/svg",
           "host": ["{{BASE_URL}}"],
           "path": ["filteredimage"],
           "query": [
@@ -157,13 +172,13 @@
               "key": "image_url",
               "value": "https://httpbin.org/image/svg"
             }
-          ]
+          ],
+          "raw": "{{BASE_URL}}/filteredimage?image_url=https://httpbin.org/image/svg"
         }
       },
       "response": []
     },
     {
-      "name": "500",
       "event": [
         {
           "listen": "test",
@@ -184,11 +199,11 @@
           }
         }
       ],
+      "name": "500",
       "request": {
-        "method": "GET",
         "header": [],
+        "method": "GET",
         "url": {
-          "raw": "{{BASE_URL}}/filteredimage?image_url=https://httpbin.org/status/500",
           "host": ["{{BASE_URL}}"],
           "path": ["filteredimage"],
           "query": [
@@ -196,13 +211,13 @@
               "key": "image_url",
               "value": "https://httpbin.org/status/500"
             }
-          ]
+          ],
+          "raw": "{{BASE_URL}}/filteredimage?image_url=https://httpbin.org/status/500"
         }
       },
       "response": []
     },
     {
-      "name": "successful request",
       "event": [
         {
           "listen": "test",
@@ -222,11 +237,11 @@
           }
         }
       ],
+      "name": "successful request",
       "request": {
-        "method": "GET",
         "header": [],
+        "method": "GET",
         "url": {
-          "raw": "{{BASE_URL}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
           "host": ["{{BASE_URL}}"],
           "path": ["filteredimage"],
           "query": [
@@ -234,33 +249,18 @@
               "key": "image_url",
               "value": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg"
             }
-          ]
+          ],
+          "raw": "{{BASE_URL}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg"
         }
       },
       "response": []
     }
   ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "type": "text/javascript",
-        "exec": [""]
-      }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "type": "text/javascript",
-        "exec": [""]
-      }
-    }
-  ],
   "variable": [
     {
       "key": "HOST",
-      "value": "localhost:8082",
-      "type": "string"
+      "type": "string",
+      "value": "localhost:8080"
     }
   ]
 }
